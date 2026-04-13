@@ -23,30 +23,32 @@ public class UserController {
     public UserController(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
-    @GetMapping("/users")
-    public String getUsers(Model model) {
-        List<User> users = userRepository.getUsers();
-        model.addAttribute("users", users);
-        return "users";
+
+    @ModelAttribute("user")
+    public User getUser(@PathVariable("userId") String userId) {
+        return userRepository.getUser(userId);
     }
 
+//    @GetMapping("/users")
+//    public String getUsers(Model model) {
+//        List<User> users = userRepository.getUsers();
+//        model.addAttribute("users", users);
+//        return "users";
+//    }
+
     @GetMapping("/user/{userId}")
-    public String getUser(Model model,
-                          @PathVariable("userId") String id) {
-        User user = userRepository.getUser(id);
-        model.addAttribute("user", user);
+    public String getUser() {
         return "user";
     }
 
     @GetMapping("/user/{userId}/modify")
-    public String userModifyForm(@PathVariable("userId") String userId, Model model) {
-        User user = userRepository.getUser(userId);
+    public String userModifyForm(@ModelAttribute("user") User user,
+                                 Model model) {
         if (Objects.isNull(user)) {
             model.addAttribute("exception", new UserNotFoundException());
             return "error";
         }
 
-        model.addAttribute("user", user);
         return "userModify";
     }
 }
