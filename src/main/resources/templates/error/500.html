@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>500 Internal Server Error</title>
+    <style>
+        .error-container { margin: 50px; padding: 20px; border: 1px solid #ff0000; border-radius: 10px; background-color: #fffafa; }
+        .error-msg { color: #c0392b; font-weight: bold; }
+    </style>
+</head>
+<body>
+<div class="error-container">
+    <h1>서버 내부 오류 (500)</h1>
+    <hr>
+    <p>서버에서 처리 중 예상치 못한 오류가 발생했습니다.</p>
+    <div>
+        <p><strong>상세 원인:</strong> <span class="error-msg" th:text="${errorMessage}">시스템 오류 발생</span></p>
+        <p><strong>발생 시각:</strong> <span th:text="${#temporals.format(timestamp, 'yyyy-MM-dd')}">2026-04-13</span></p>
+    </div>
+    <hr>
+    <p>문제가 지속되면 관리자에게 문의해 주세요.</p>
+    <button onclick="history.back()">이전으로</button>
+    <a href="/login"><button>메인으로</button></a>
+</div>
+</body>
+</html>

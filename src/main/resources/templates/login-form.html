@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>로그인</title>
+</head>
+<body>
+<h2>학생 시스템 로그인</h2>
+<form th:action="@{/login}" th:object="${loginRequest}" method="post">
+    <div>
+        ID: <input type="text" th:field="*{id}" placeholder="아이디 입력" />
+        <p th:if="${#fields.hasErrors('id')}" th:errors="*{id}" style="color:red"></p>
+    </div>
+    <div>
+        PWD: <input type="password" th:field="*{password}" placeholder="비밀번호 입력" />
+        <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}" style="color:red"></p>
+    </div>
+    <button type="submit">로그인</button>
+</form>
+<hr>
+<a href="/student/register">학생 등록하러 가기</a>
+</body>
+</html>
