@@ -1,8 +1,13 @@
 package com.nhnacademy.springbootmvc.controller;
 
+import com.nhnacademy.springbootmvc.domain.Post;
+import com.nhnacademy.springbootmvc.exception.PostNotFoundException;
 import com.nhnacademy.springbootmvc.repository.PostRepository;
+import java.util.Optional;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -16,7 +21,14 @@ public class PostController {
 
     // TODO #2: 게시물 조회 구현
     @GetMapping("/{postId}")
-    public String viewPost() {
+    public String viewPost(@PathVariable long postId, Model model) {
+        Post post = postRepository.getPost(postId);
+
+        if(post == null) {
+            throw new PostNotFoundException("post not found");
+        }
+
+        model.addAttribute("post", post);
         // ...
         return "postView";
     }
