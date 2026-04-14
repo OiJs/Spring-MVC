@@ -14,6 +14,7 @@
     <hr>
     <p>요청하신 정보를 찾을 수 없습니다.</p>
     <ul>
+        <li><strong>에러 코드: </strong><span class="error-msg" th:text="${errorCode}">에러 코드</span> </li>
         <li><strong>에러 메시지:</strong> <span class="error-msg" th:text="${errorMessage}">에러 내용</span></li>
         <li><strong>발생 시각:</strong> <span th:text="${#temporals.format(timestamp, 'yyyy-MM-dd')}">2026-04-13</span></li>
     </ul>

@@ -14,6 +14,8 @@
     <hr>
     <p>서버에서 처리 중 예상치 못한 오류가 발생했습니다.</p>
     <div>
+        <p><strong>에러 코드: </strong><span class="error-msg" th:text="${errorCode}">에러 코드</span> </p>
+
         <p><strong>상세 원인:</strong> <span class="error-msg" th:text="${errorMessage}">시스템 오류 발생</span></p>
         <p><strong>발생 시각:</strong> <span th:text="${#temporals.format(timestamp, 'yyyy-MM-dd')}">2026-04-13</span></p>
     </div>

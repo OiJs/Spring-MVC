@@ -28,9 +28,9 @@ public class StudentRegisterController {
 
     @PostMapping
     public String doRegister(@Valid @ModelAttribute StudentRegisterRequest studentRegisterRequest,
+                             BindingResult bindingResult,
                              HttpSession session,
-                             HttpServletResponse response,
-                             BindingResult bindingResult) {
+                             HttpServletResponse response) {
         if(bindingResult.hasErrors()) {
             return "register-form";
         }

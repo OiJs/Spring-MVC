@@ -27,6 +27,7 @@ public class StudentRegisterRequest {
     @Max(100)
     Integer score;
 
+    @NotBlank
     @Length(max = 200)
     String comment;
 }

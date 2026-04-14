@@ -2,56 +2,60 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>학생 정보 수정</title>
+    <title th:text="#{title.student.modify}">학생 정보 수정</title>
 </head>
 <body>
-<h2 th:text="|${student.name} 님의 정보 수정|">학생 정보 수정</h2>
+<h2 th:text="|${student.name} #{title.student.modify}|">학생 정보 수정</h2>
 
 <form th:action="@{/student/{id}/modify(id=${student.id})}" th:object="${student}" method="post">
     <div>
-        아이디:
-        <input type="text" th:value="*{id}" readonly style="background-color: #eee;" />
+        <label th:text="#{label.id}"></label>:
+        <input type="text" th:value="*{id}" name="id" readonly style="background-color: #eee;" />
     </div>
     <br>
     <div>
-        비밀번호:
-        <input type="password" name="password" th:value="*{password}" required />
+        <label th:text="#{label.password}"></label>:
+        <input type="password" th:field="*{password}" required />
         <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}" style="color:red"></p>
     </div>
     <br>
     <div>
-        이름:
+        <label th:text="#{label.name}"></label>:
         <input type="text" th:field="*{name}" />
         <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}" style="color:red"></p>
     </div>
     <br>
     <div>
-        이메일:
+        <label th:text="#{label.email}"></label>:
         <input type="email" th:field="*{email}" />
         <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}" style="color:red"></p>
     </div>
     <br>
     <div>
-        점수:
+        <label th:text="#{label.score}"></label>:
         <input type="number" th:field="*{score}" />
         <p th:if="${#fields.hasErrors('score')}" th:errors="*{score}" style="color:red"></p>
     </div>
     <br>
     <div>
-        비고: <br>
+        <label th:text="#{label.comment}"></label>: <br>
         <textarea th:field="*{comment}" cols="30" rows="5"></textarea>
         <p th:if="${#fields.hasErrors('comment')}" th:errors="*{comment}" style="color:red"></p>
     </div>
     <br>
-    <button type="submit">수정 완료</button>
+    <button type="submit" th:text="#{button.modify}">수정 완료</button>
     <a th:href="@{/student/{id}(id=${student.id})}">
-        <button type="button">취소</button>
+        <button type="button" th:text="#{button.reset}">취소</button>
     </a>
 </form>
 
 <hr>
 <form th:action="@{/logout}" method="post">
-    <button type="submit">로그아웃</button>
+    <button type="submit" th:text="#{link.logout}">로그아웃</button>
 </form>
+<div style="display: flex; gap: 10px;">
+    <a href="?lang=ko">KOREAN</a>
+    <a href="?lang=en">ENGLISH</a>
+</div>
 </body>
 </html>

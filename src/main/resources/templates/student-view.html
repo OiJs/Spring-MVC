@@ -2,51 +2,54 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>학생 상세 정보</title>
+    <title th:text="#{title.student.view}">학생 상세 정보</title>
 </head>
 <body>
-<h2 th:text="|${student.name} 님의 정보|">학생 정보</h2>
+<h2 th:text="#{title.student.info(${student.name})}">학생 정보</h2>
 
 <table>
     <tr>
-        <th>아이디</th>
+        <th th:text="#{label.id}">아이디</th>
         <td th:text="${student.id}">ID</td>
     </tr>
     <tr>
-        <th>비밀번호</th>
+        <th th:text="#{label.password}">비밀번호</th>
         <td th:text="${student.password}">*****</td>
     </tr>
     <tr>
-        <th>이름</th>
+        <th th:text="#{label.name}">이름</th>
         <td th:text="${student.name}">Name</td>
     </tr>
     <tr>
-        <th>이메일</th>
+        <th th:text="#{label.email}">이메일</th>
         <td th:text="${student.email}">Email</td>
     </tr>
 
     <th:block th:if="${!hideScore}">
         <tr>
-            <th>점수</th>
+            <th th:text="#{label.score}">점수</th>
             <td th:text="${student.score}">0</td>
         </tr>
         <tr>
-            <th>비고</th>
+            <th th:text="#{label.comment}">비고</th>
             <td th:text="${student.comment}">Comment</td>
         </tr>
     </th:block>
-
 </table>
 
 <br>
 <div style="display: flex; gap: 10px;">
     <a th:href="@{/student/{id}/modify(id=${student.id})}">
-        <button type="button">정보 수정</button>
+        <button type="button" th:text="#{link.modify}">정보 수정</button>
     </a>
 
     <form th:action="@{/logout}" method="post">
-        <button type="submit">로그아웃</button>
+        <button type="submit" th:text="#{link.logout}">로그아웃</button>
     </form>
+</div>
+<div style="display: flex; gap: 10px;">
+    <a href="?lang=ko">KOREAN</a>
+    <a href="?lang=en">ENGLISH</a>
 </div>
 </body>
 </html>

@@ -1,6 +1,7 @@
 package com.nhnacademy.springmvc.service.impl;
 
 import com.nhnacademy.springmvc.domain.Student;
+import com.nhnacademy.springmvc.exception.StudentAlreadyExistsException;
 import com.nhnacademy.springmvc.repository.StudentRepository;
 import com.nhnacademy.springmvc.service.StudentService;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +23,10 @@ public class StudentServiceImpl implements StudentService {
     public void register(Student student) {
         if(student == null) {
             throw new IllegalArgumentException("student is null");
+        }
+
+        if(studentRepository.exists(student.getId())) {
+            throw new StudentAlreadyExistsException("student already exits");
         }
         studentRepository.register(student);
     }

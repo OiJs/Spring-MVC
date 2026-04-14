@@ -1,7 +1,6 @@
 package com.nhnacademy.springmvc.repository.impl;
 
 import com.nhnacademy.springmvc.domain.Student;
-import com.nhnacademy.springmvc.exception.StudentAlreadyExistsException;
 import com.nhnacademy.springmvc.exception.StudentNotFoundException;
 import com.nhnacademy.springmvc.repository.StudentRepository;
 import java.util.HashMap;
@@ -32,9 +31,7 @@ public class StudentRepositoryImpl implements StudentRepository {
         if (Objects.isNull(student)) {
             throw new IllegalArgumentException("student is null");
         }
-        if (exists(student.getId())) {
-            throw new StudentAlreadyExistsException();
-        }
+
         studentMap.put(student.getId(), student);
         return student;
     }
@@ -45,7 +42,7 @@ public class StudentRepositoryImpl implements StudentRepository {
             throw new IllegalArgumentException("student is null");
         }
         if(!exists(student.getId())) {
-            throw new StudentNotFoundException();
+            throw new StudentNotFoundException(student.getId());
         }
         studentMap.put(student.getId(), student);
         return student;
@@ -58,7 +55,7 @@ public class StudentRepositoryImpl implements StudentRepository {
         Student student = studentMap.get(id);
 
         if(student == null) {
-            throw new StudentNotFoundException();
+            throw new StudentNotFoundException(id);
         }
         return student;
     }
@@ -69,7 +66,7 @@ public class StudentRepositoryImpl implements StudentRepository {
 
         return Optional.ofNullable(studentMap.get(id))
                 .map(s -> s.getPassword().equals(password))
-                .orElseThrow(StudentNotFoundException::new);
+                .orElseThrow(() -> new StudentNotFoundException(id));
     }
 
     private void validateId(String id) {

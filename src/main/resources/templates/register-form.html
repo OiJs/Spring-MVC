@@ -2,48 +2,57 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>학생 등록</title>
+    <title th:text="#{title.student.register}">학생 등록</title>
 </head>
 <body>
-<h2>학생 등록</h2>
+<h2 th:text="#{title.student.register}">학생 등록</h2>
 
 <form th:action="@{/student/register}" th:object="${studentRegisterRequest}" method="post">
     <div>
-        ID: <input type="text" th:field="*{id}" />
+        <label th:text="#{label.id}"></label>:
+        <input type="text" th:field="*{id}"/>
         <span th:if="${#fields.hasErrors('id')}" th:errors="*{id}" style="color:red">ID 에러</span>
     </div>
     <br>
     <div>
-        PW: <input type="password" th:field="*{password}" />
+        <label th:text="#{label.password}"></label>:
+        <input type="password" th:field="*{password}"/>
         <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" style="color:red">PW 에러</span>
     </div>
     <br>
     <div>
-        이름: <input type="text" th:field="*{name}" />
+        <label th:text="#{label.name}"></label>:
+        <input type="text" th:field="*{name}"/>
         <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" style="color:red">이름 에러</span>
     </div>
     <br>
     <div>
-        이메일: <input type="email" th:field="*{email}" />
+        <label th:text="#{label.email}"></label>:
+        <input type="email" th:field="*{email}"/>
         <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" style="color:red">이메일 에러</span>
     </div>
     <br>
     <div>
-        점수: <input type="number" th:field="*{score}" />
+        <label th:text="#{label.score}"></label>:
+        <input type="number" th:field="*{score}" />
         <span th:if="${#fields.hasErrors('score')}" th:errors="*{score}" style="color:red">점수 에러</span>
     </div>
     <br>
     <div>
-        비고: <br>
+        <label th:text="#{label.comment}"></label>: <br>
         <textarea th:field="*{comment}" cols="30" rows="5"></textarea>
         <p th:if="${#fields.hasErrors('comment')}" th:errors="*{comment}" style="color:red">비고 에러</p>
     </div>
     <br>
-    <button type="submit">등록하기</button>
-    <button type="reset">취소</button>
+    <button type="submit" th:text="#{button.register}">등록하기</button>
+    <button type="reset" th:text="#{button.reset}">취소</button>
 </form>
 
 <hr>
-<a href="/login">로그인 화면으로 돌아가기</a>
+<a href="/login" th:text="#{link.login}">로그인 화면으로 돌아가기</a>
+<div style="display: flex; gap: 10px;">
+    <a href="?lang=ko">KOREAN</a>
+    <a href="?lang=en">ENGLISH</a>
+</div>
 </body>
 </html>
