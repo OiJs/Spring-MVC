@@ -64,7 +64,7 @@ public class UserController {
                              Model model) {
         if (bindingResult.hasErrors()) {
             throw new ValidationFailedException(bindingResult);
-        }
+        } 
 
         user.setAge(userRequest.getAge());
         user.setName(userRequest.getName());
