@@ -38,4 +38,14 @@ public class PostRepositoryImpl implements PostRepository {
         return exists(id) ? posts.get(id) : null;
     }
 
+    @Override
+    public Post modify(long id, String title, String content) {
+        Post modifyPost = Post.create(title, content);
+        modifyPost.setId(id);
+
+        posts.put(id, modifyPost);
+
+        return modifyPost;
+    }
+
 }

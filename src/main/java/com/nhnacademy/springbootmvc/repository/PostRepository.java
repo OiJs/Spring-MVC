@@ -9,4 +9,6 @@ public interface PostRepository {
 
     Post getPost(long id);
 
+    Post modify(long id, String title, String content);
+
 }
