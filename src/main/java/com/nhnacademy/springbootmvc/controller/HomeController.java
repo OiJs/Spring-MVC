@@ -31,9 +31,12 @@ public class HomeController {
         return "localdate";
     }
 
-    //TODO 2: request parameter 로 money 를 받아서 출력하는 메서드 구현
+    //TODO 3: request parameter 로 money 를 받아서 출력하는 메서드 구현
     @GetMapping("/money")
-    public String money(){
-        return null;
+    public String money(@RequestParam("money") BigDecimal money,
+                        Model model){
+        model.addAttribute("money", money);
+        return "money";
+
     }
 }
